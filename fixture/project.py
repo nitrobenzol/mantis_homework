@@ -1,3 +1,6 @@
+from model.project import Project
+
+
 class ProjectHelper:
 
     def __init__(self, app):
@@ -41,3 +44,21 @@ class ProjectHelper:
         self.open_manage_projects()
         self.open_adding_project()
         self.fill_project_details(name, description)
+
+    project_cache = None
+
+    def get_projects_list(self):
+        wd = self.app.wd
+        self.open_manage_page()
+        self.open_manage_projects()
+        self.project_cache = []
+        for element in wd.find_elements_by_xpath("//tbody/tr")[:-1]:
+            cells = element.find_elements_by_tag_name("td")
+            name = cells[0].text
+            # status = cells[1].text
+            # enabled = cells[2].text
+            # view_status = cells[3].text
+            description = cells[4].text
+            id = cells[0].find_element_by_tag_name("a").get_attribute("href")[70:]
+            self.project_cache.append(Project(name=name, description=description, id=id))
+        return self.project_cache
