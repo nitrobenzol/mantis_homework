@@ -18,6 +18,18 @@ class ProjectHelper:
         wd = self.app.wd
         wd.find_element_by_xpath("//button[@class='btn btn-primary btn-white btn-round']").click()
 
+    #def fill_project_form(self, project):
+        #wd = self.app.wd
+        #self.change_field_value("project_name", project.name)
+        #self.change_field_value("group_header", project.description)
+
+    #def change_field_value(self, field_name, text):
+        #wd = self.app.wd
+        #if text is not None:
+            #wd.find_element_by_name(field_name).click()
+            #wd.find_element_by_name(field_name).clear()
+            #wd.find_element_by_name(field_name).send_keys(text)
+
     def fill_project_details(self, name, description):
         wd = self.app.wd
         # add project name
@@ -38,12 +50,12 @@ class ProjectHelper:
         # save this project
         wd.find_element_by_xpath("//input[@type='submit']").click()
 
-    def add_new_project(self, name, description):
+    def add_new_project(self, project):
         wd = self.app.wd
         self.open_manage_page()
         self.open_manage_projects()
         self.open_adding_project()
-        self.fill_project_details(name, description)
+        self.fill_project_details(project.name, project.description)
 
     project_cache = None
 
