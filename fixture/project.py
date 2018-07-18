@@ -8,11 +8,13 @@ class ProjectHelper:
 
     def open_manage_page(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//a[@href='/mantisbt-2.15.0/manage_overview_page.php']").click()
+        if not wd.current_url.endswith("/manage_overview_page.php"):
+            wd.find_element_by_xpath("//a[@href='/mantisbt-2.15.0/manage_overview_page.php']").click()
 
     def open_manage_projects(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//a[@href='/mantisbt-2.15.0/manage_proj_page.php']").click()
+        if not wd.current_url.endswith("/manage_proj_page.php"):
+            wd.find_element_by_xpath("//a[@href='/mantisbt-2.15.0/manage_proj_page.php']").click()
 
     def open_adding_project(self):
         wd = self.app.wd
