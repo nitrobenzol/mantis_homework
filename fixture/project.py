@@ -13,6 +13,7 @@ class ProjectHelper:
 
     def open_manage_projects(self):
         wd = self.app.wd
+        self.open_manage_page()
         if not wd.current_url.endswith("/manage_proj_page.php"):
             wd.find_element_by_xpath("//a[@href='/mantisbt-2.15.0/manage_proj_page.php']").click()
 
@@ -42,7 +43,7 @@ class ProjectHelper:
 
     def add_new_project(self, project):
         wd = self.app.wd
-        self.open_manage_page()
+        # self.open_manage_page()
         self.open_manage_projects()
         self.open_adding_project()
         self.fill_project_details(project.name, project.description)
@@ -51,7 +52,7 @@ class ProjectHelper:
 
     def get_projects_list(self):
         wd = self.app.wd
-        self.open_manage_page()
+        # self.open_manage_page()
         self.open_manage_projects()
         self.project_cache = []
         for element in wd.find_elements_by_xpath("//tbody/tr")[:-1]:
@@ -67,7 +68,7 @@ class ProjectHelper:
 
     def delete_project_by_id(self, id):
         wd = self.app.wd
-        self.open_manage_page()
+        # self.open_manage_page()
         self.open_manage_projects()
         self.select_project_by_id(id)
         self.delete_project()
