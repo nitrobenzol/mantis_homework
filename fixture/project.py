@@ -62,3 +62,19 @@ class ProjectHelper:
             id = cells[0].find_element_by_tag_name("a").get_attribute("href")[70:]
             self.project_cache.append(Project(name=name, description=description, id=id))
         return self.project_cache
+
+    def delete_project_by_id(self, id):
+        wd = self.app.wd
+        self.open_manage_page()
+        self.open_manage_projects()
+        self.select_project_by_id(id)
+        self.delete_project()
+
+    def select_project_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//a[contains(@href, %s) and contains(@href, 'manage_proj_edit_page.php?project_id=')]" % id).click()
+
+    def delete_project(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
